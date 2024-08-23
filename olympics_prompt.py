@@ -128,5 +128,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "OlympicsPrompt": "OlympicsPrompt-PAI",
+    "OlympicsPrompt": "OlympicsPrompt（PAI Artlab）",
 }
