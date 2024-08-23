@@ -82,18 +82,22 @@ def load_image(filename: str):
     img = Image.open(file_path)
     img = ImageOps.exif_transpose(img)  # 处理 EXIF 旋转
     img = img.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
-    
+
     # 转换为 NumPy 数组并归一化
     img = np.array(img, dtype=np.float32) / 255.0
+
+    # 检查图像是否是二维（单通道灰度图），如果是则扩展维度
+    if img.ndim == 2:
+        img = np.expand_dims(img, axis=-1)  # 扩展为 [H, W, 1]
+    
+    # 确保图像通道数为3或4
+    if img.shape[-1] not in [3, 4]:
+        raise ValueError(f"Unexpected number of channels: {img.shape[-1]}")
 
     # 转换为 PyTorch 张量，并调整形状为 [C, H, W]
     tensor_img = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0)  # [H, W, C] -> [C, H, W] 并添加 batch 维度
     
     return tensor_img  # 返回 PyTorch 张量
-    
-    # img = np.array(img, dtype=np.float32) / 255.0  # 转换为 NumPy 数组并归一化
-    # tensor_img = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0)  # [H, W, C] -> [C, H, W] 并添加 batch 维度
-    # return tensor_img
 
 class OlympicsPrompt:
 
