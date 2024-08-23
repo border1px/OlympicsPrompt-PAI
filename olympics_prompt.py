@@ -94,12 +94,13 @@ class OlympicsPrompt:
     sex_dict = { '男': 'man', '女': 'female', '男孩': 'boy', '女孩': 'girl' }
 
     def __init__(self):
-        self.dir = os.path.dirname(os.path.realpath(__file__))
+        # self.dir = os.path.dirname(os.path.realpath(__file__))
+        print(os.path.dirname(os.path.realpath(__file__)))
         pass
 
     @classmethod
     def INPUT_TYPES(self):
-        self.prompts = read_json_file(os.path.join(self.dir, 'prompts.json'))
+        self.prompts = read_json_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'prompts.json'))
         
         return {
             "required": {
