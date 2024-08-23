@@ -1,0 +1,62 @@
+[
+  {
+    "name": "乒乓球",
+    "prompt": "of a {prompt} athlete ping pong player,[holding a ping-pong paddle, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "击剑",
+    "prompt": "of a {prompt} athlete fencer,fencing,standing, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "射箭",
+    "prompt": "of a {prompt} athlete archer holding a white arrow,aiming, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "拳击",
+    "prompt": "of a {prompt} athlete boxer in ring, full body,long vest，white gloves, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "排球",
+    "prompt": "of a {prompt} athlete volleyball player,long vest,full body, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "柔道",
+    "prompt": "of a {prompt} athlete judo practitioner in match, pure color cloth,standing, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "田径",
+    "prompt": "of a {prompt} athlete running on track,unisex uniform half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "篮球",
+    "prompt": "of a {prompt} athlete playing basketball, energetic action, stadium, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "网球",
+    "prompt": "of a {prompt} athlete tennis player, intense focus, tennis court,half body, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "足球",
+    "prompt": "of a {prompt} athlete soccer player,short pass,half body, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "跳水",
+    "prompt": "of a {prompt} athlete diver,full body, half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  },
+  {
+    "name": "马术",
+    "prompt": "of a {prompt} athlete equestrian rider jumping hurdle, horse and rider half body,purple uniform, oylmpic games，Professional athletes, looking at viewer, capturing the intensity and motion of the game, front view, (medium shot, bilaterally symmetrical)",
+    "negative_prompt": ""
+  }
+]
