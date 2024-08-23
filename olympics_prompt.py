@@ -106,16 +106,16 @@ class OlympicsPrompt:
             "required": {
                 "sports": ([item['name'] for item in self.prompts],),
                 "sex": (list(self.sex_dict.keys()),),
-                "name": ("STRING", { "default": "Rainbow" })
+                "signature": ("STRING", { "default": "Rainbow" })
             },
         }
 
-    RETURN_TYPES = ('STRING', 'STRING', 'STRING')
-    RETURN_NAMES = ('prompt', 'background_image_path', 'name')
+    RETURN_TYPES = ('STRING', 'IMAGE', 'STRING')
+    RETURN_NAMES = ('prompt', 'bg_image', 'signature')
     FUNCTION = 'prompt_styler'
     CATEGORY = 'utils'
 
-    def prompt_styler(self, sports, sex, name):
+    def prompt_styler(self, sports, sex, signature):
         # Process and combine prompts in templates
         # The function replaces the positive prompt placeholder in the template,
         # and combines the negative prompt with the template's negative prompt, if they exist.
@@ -124,7 +124,7 @@ class OlympicsPrompt:
 
         background_img = load_image(f"{sports}.png")
 
-        return text_positive_styled, background_img, name
+        return text_positive_styled, background_img, signature
     
 NODE_CLASS_MAPPINGS = {
     "OlympicsPrompt": OlympicsPrompt,
