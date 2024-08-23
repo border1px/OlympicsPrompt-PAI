@@ -76,7 +76,7 @@ def load_image(filename: str):
 
     i = Image.open(file_path)
     i = ImageOps.exif_transpose(i)  # 处理 EXIF 旋转
-    img = i.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
+    img = i.convert("RGBA" if "A" in i.getbands() else "RGB")  # 转换颜色模式
     img = np.array(img, dtype=np.float32) / 255.0
     img = torch.from_numpy(img)[None,]
     if 'A' in i.getbands():
