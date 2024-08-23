@@ -83,13 +83,13 @@ def load_image(filename: str):
     img = ImageOps.exif_transpose(img)  # 处理 EXIF 旋转
     img = img.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
     
-    img = np.array(img, dtype=np.float32)
-    #This nonsense provides a nearly 50% speedup on my system
-    torch.from_numpy(img).div_(255)
-    img = torch.from_numpy(img).movedim(-1, 0).unsqueeze(0)
-    img = img.squeeze(0).movedim(0, -1).numpy()
+    # 转换为 NumPy 数组并归一化
+    img = np.array(img, dtype=np.float32) / 255.0
+
+    # 转换为 PyTorch 张量，并调整形状为 [C, H, W]
+    tensor_img = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0)  # [H, W, C] -> [C, H, W] 并添加 batch 维度
     
-    return img
+    return tensor_img  # 返回 PyTorch 张量
     
     # img = np.array(img, dtype=np.float32) / 255.0  # 转换为 NumPy 数组并归一化
     # tensor_img = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0)  # [H, W, C] -> [C, H, W] 并添加 batch 维度
