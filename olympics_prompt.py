@@ -74,14 +74,13 @@ def load_image(filename: str):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File '{filename}' does not exist in the '{folder_path}' directory.")
 
-    img = Image.open(file_path)
-    img = ImageOps.exif_transpose(img)  # 处理 EXIF 旋转
-    img = img.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
-
+    i = Image.open(file_path)
+    i = ImageOps.exif_transpose(i)  # 处理 EXIF 旋转
+    img = i.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
     img = np.array(img, dtype=np.float32) / 255.0
     img = torch.from_numpy(img)[None,]
-    if 'A' in img.getbands():
-        mask = np.array(img.getchannel('A')).astype(np.float32) / 255.0
+    if 'A' in i.getbands():
+        mask = np.array(i.getchannel('A')).astype(np.float32) / 255.0
         mask = 1. - torch.from_numpy(mask)
     else:
         mask = torch.zeros((64,64), dtype=torch.float32, device="cpu")
