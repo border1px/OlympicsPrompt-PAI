@@ -64,41 +64,29 @@ def replace_prompts_in_template(template, positive_prompt, negative_prompt):
     return positive_result, negative_result
 
 def load_image(filename: str):
-    # 获取 images 文件夹路径
     folder_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
     
-    # 检查文件夹是否存在
     if not os.path.isdir(folder_path):
         raise FileNotFoundError(f"Directory '{folder_path}' does not exist.")
     
-    # 构造完整的文件路径
     file_path = os.path.join(folder_path, filename)
     
-    # 检查文件是否存在
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File '{filename}' does not exist in the '{folder_path}' directory.")
 
-    # 加载并处理图片
     img = Image.open(file_path)
     img = ImageOps.exif_transpose(img)  # 处理 EXIF 旋转
     img = img.convert("RGBA" if "A" in img.getbands() else "RGB")  # 转换颜色模式
 
-    # 转换为 NumPy 数组并归一化
     img = np.array(img, dtype=np.float32) / 255.0
-
-    # 检查图像是否是二维（单通道灰度图），如果是则扩展维度
-    if img.ndim == 2:
-        img = np.expand_dims(img, axis=-1)  # 扩展为 [H, W, 1]
+    img = torch.from_numpy(img)[None,]
+    if 'A' in img.getbands():
+        mask = np.array(img.getchannel('A')).astype(np.float32) / 255.0
+        mask = 1. - torch.from_numpy(mask)
+    else:
+        mask = torch.zeros((64,64), dtype=torch.float32, device="cpu")
+    return (img, mask)
     
-    # 确保图像通道数为3或4
-    if img.shape[-1] not in [3, 4]:
-        raise ValueError(f"Unexpected number of channels: {img.shape[-1]}")
-
-    # 转换为 PyTorch 张量，并调整形状为 [C, H, W]
-    tensor_img = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0)  # [H, W, C] -> [C, H, W] 并添加 batch 维度
-    
-    return tensor_img  # 返回 PyTorch 张量
-
 class OlympicsPrompt:
 
     sex_dict = { '男': 'man', '女': 'female', '男孩': 'boy', '女孩': 'girl' }
@@ -132,7 +120,7 @@ class OlympicsPrompt:
         template = find_template_by_name(self.prompts, sports)
         text_positive_styled, text_negative_styled = replace_prompts_in_template(template, self.sex_dict[sex], '')
 
-        background_img = load_image(f"{sports}.png")
+        background_img, mask = load_image(f"{sports}.png")
 
         return text_positive_styled, background_img, signature
     
