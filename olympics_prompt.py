@@ -76,7 +76,7 @@ def load_image(filename: str):
 
     i = Image.open(file_path)
     i = ImageOps.exif_transpose(i)  # 处理 EXIF 旋转
-    img = i.convert("RGBA" if "A" in i.getbands() else "RGB")  # 转换颜色模式
+    img = i.convert("RGBA" if "A" in i.getbands() else "RGB")
     img = np.array(img, dtype=np.float32) / 255.0
     img = torch.from_numpy(img)[None,]
     if 'A' in i.getbands():
@@ -91,8 +91,6 @@ class OlympicsPrompt:
     sex_dict = { '男': 'man', '女': 'female', '男孩': 'boy', '女孩': 'girl' }
 
     def __init__(self):
-        # self.dir = os.path.dirname(os.path.realpath(__file__))
-        print(os.path.dirname(os.path.realpath(__file__)))
         pass
 
     @classmethod
@@ -122,6 +120,10 @@ class OlympicsPrompt:
         background_img, mask = load_image(f"{sports}.png")
 
         return text_positive_styled, background_img, signature
+    
+    @classmethod
+    def IS_CHANGED(self, sports, sex, signature):
+        return f"{sports}_{sex}_{signature}"
     
 NODE_CLASS_MAPPINGS = {
     "OlympicsPrompt": OlympicsPrompt,
